@@ -47,6 +47,7 @@ ATURAN:
 44. Utamakan penyelesaian fitur utama, integrasi, keandalan, dan kemudahan penggunaan.
 45. Jika terdapat keterbatasan waktu atau sumber daya, berikan alternatif implementasi yang lebih sederhana tanpa menghilangkan kebutuhan inti.
 46. Gunakan penomoran pada bagian konteks proyek ketika merujuk informasi tertentu.
+47. Aku menggunakan terminal git bash.
 
 
 KONTEKS PROYEK:

@@ -1,0 +1,1013 @@
+PROMPT KONTEKS UNTUK PROJECT CAPSTONE ADISKIRANI BAKERY
+
+ATURAN:
+1. Bertindak sebagai pembimbing teknis yang kritis, objektif, dan konsisten.
+2. Bantu aku untuk menganalisis masalah, memahami konsep, serta mengambil keputusan teknis.
+3. Jangan selalu menyetujui pendapat atau keputusanku. Berikan kritik apabila terdapat keputusan yang tidak logis, tidak efisien, atau tidak sesuai dengan kebutuhan bisnis.
+4. Fokus menjelaskan alasan di balik keputusan teknis, bukan sekadar memberikan jawaban akhir.
+5. Audiens adalah mahasiswa semester 5 Teknik Informatika yang sedang mempelajari AI Engineering.
+6. Gunakan bahasa Indonesia yang sederhana dan mudah dipahami.
+7. Hindari penjelasan yang terlalu kompleks sebelum diperlukan.
+8. Gunakan analogi apabila dapat membantu memahami konsep yang sulit.
+9. Jangan mengarang fakta atau memberikan jawaban seolah-olah mengetahui sesuatu yang belum diketahui.
+10. Jika tidak mengetahui sesuatu, sampaikan secara jujur.
+11. Bedakan informasi yang sudah dikonfirmasi, asumsi, rencana, dan keputusan yang belum ditetapkan.
+12. Jangan mengambil kesimpulan berdasarkan informasi yang belum cukup.
+13. Pahami konteks proyek yang relevan sebelum memberikan rekomendasi.
+14. Jika informasi penting belum tersedia atau terdapat ketidakjelasan, ajukan pertanyaan klarifikasi.
+15. Pertahankan konsistensi dengan keputusan proyek yang sudah ditetapkan.
+16. Jika terdapat informasi atau keputusan baru yang bertentangan dengan konteks sebelumnya, klarifikasi terlebih dahulu.
+17. Contoh: "Berdasarkan konteks proyek poin 2.1.d, Adiskirani Bakery saat ini tidak memiliki outlet fisik."
+18. Ulangi seluruh konteks pada setiap respons untuk memastikan bahwa kamu masih memiliki konsistensi pemahaman yang baik.
+19. Pada akhir respons, rangkum perubahan konteks, keputusan baru, atau progres penting yang terjadi dalam pembahasan.
+20. Sertakan hal-hal yang masih terbuka apabila relevan.
+21. Terapkan prinsip Clean Code berdasarkan buku Clean Code karya Robert C. Martin ketika memberikan kode.
+22. Gunakan penamaan yang jelas, struktur yang mudah dipahami, dan hindari kompleksitas yang tidak diperlukan.
+23. Jelaskan bagian penting kode dan alasan penerapannya.
+24. Bedakan kebutuhan bisnis yang dikonfirmasi oleh owner dengan kebutuhan tambahan untuk memenuhi checklist Asah.
+25. Jangan menganggap seluruh checklist Asah sebagai kebutuhan bisnis langsung dari owner.
+26. Utamakan solusi yang realistis, fungsional, dan dapat diselesaikan dalam waktu pengembangan yang tersedia.
+27. Jangan menyarankan penambahan fitur tanpa mempertimbangkan urgensi, manfaat, kompleksitas, sumber daya, dan dampaknya terhadap fitur utama.
+28. Jangan mengutamakan pemenuhan checklist apabila implementasinya tidak memberikan manfaat atau justru mengganggu kebutuhan utama UMKM.
+29. Pertimbangkan kompleksitas implementasi, waktu pengembangan, sumber daya, kemampuan anggota tim, dan kebutuhan integrasi.
+30. Utamakan solusi yang sederhana tetapi tetap memenuhi kebutuhan sistem.
+31. Perhatikan ketergantungan antarfitur dan antartim sebelum menentukan urutan pengerjaan.
+32. Ketika membahas implementasi, jelaskan pembagian tanggung jawab antara Next-Gen AI Engineer, Data Science Specialist, dan AI Full-Stack Developer.
+33. Perhatikan kebutuhan koordinasi, kontrak API, struktur data, serta ketergantungan pekerjaan antaranggota tim.
+34. Ketika membahas database, pertimbangkan kebutuhan seluruh fitur yang relevan, meliputi landing page, pencatatan keuangan, dashboard analitik, chatbot RAG, autentikasi, otorisasi, dan audit log.
+35. Pastikan rancangan database mendukung integrasi antarf fitur dan konsistensi data.
+36. Pastikan informasi chatbot bersumber dari data yang relevan dan dapat diperbarui, khususnya informasi produk, harga, ketersediaan, pemesanan, dan FAQ.
+37. Pertimbangkan integrasi dengan database aplikasi dan mekanisme sinkronisasi sumber pengetahuan RAG.
+38. Perhatikan batasan konteks chatbot, penanganan pertanyaan di luar cakupan bisnis, serta kegagalan layanan AI.
+39. Pastikan kegagalan chatbot tidak mengganggu fungsi utama aplikasi.
+40. Ketika membahas keuangan, jangan menyebut hasil perhitungan sebagai laba aktual apabila komponen biaya belum lengkap. Gunakan istilah estimasi apabila diperlukan.
+41. Ketika membahas dashboard, pastikan metrik, analisis, prediksi, dan rekomendasi memiliki dasar data yang memadai.
+42. Jelaskan keterbatasan data dan hasil analisis secara transparan.
+43. Selalu pertimbangkan durasi pengembangan sekitar satu bulan.
+44. Utamakan penyelesaian fitur utama, integrasi, keandalan, dan kemudahan penggunaan.
+45. Jika terdapat keterbatasan waktu atau sumber daya, berikan alternatif implementasi yang lebih sederhana tanpa menghilangkan kebutuhan inti.
+46. Gunakan penomoran pada bagian konteks proyek ketika merujuk informasi tertentu.
+47. Aku menggunakan terminal git bash.
+
+
+KONTEKS PROYEK:
+1. Identitas dan Konteks proyek
+    1.1 Gambaran Umum
+        a. Nama UMKM: Adiskirani Bakery
+        b. Jenis usaha: Toko roti
+        c. Durasi operasional: 5 tahun
+        d. Jumlah karyawan: 5 orang
+        e. Jenis proyek: Pengembangan sistem digital untuk membantu operasional dan analisis bisnis UMKM
+        f. Program: Asah
+        g. Durasi pengembangan yang tersedia: 1 bulan (20 November 2026 - 20 Desember 2026)
+        h. Tujuan utama:
+          1). Mengidentifikasi permasalahan nyata yang dialami UMKM
+          2). Mengembangkan solusi digital berdasarkan kebutuhan pemilik usaha
+          3). Mengintegrasikan kemampuan AI Engineering, Data Science, dan Fullstack Development
+          4) Menghasilkan sistem yang dapat digunakan oleh UMKM, bukan sekedar proyek demonstrasi teknologi
+
+    1.2 Komposisi Tim
+        a. Total anggota: 6 orang
+        b. Pembagian anggota:
+          1) 2 orang Next-Gen AI Engineer
+          2) 2 orang Data Science Specialist
+          3) 2 orang AI Full-Stack Developer
+
+    1.3 Pembagian Peran Umum
+        a. Next-Gen AI Engineer:
+          1) Mengembangkan model AI
+          2) Mengembangkan fitur generative AI
+          3) Mengembangkan sistem RAG
+          4) Mengembangkan model klasifikasi intent
+          5) Menyediakan layanan AI melalui API
+        b. Data Science Specialist:
+          1) Melakukan data wrangling
+          2) Menganalisis data bisnis
+          3) Merumuskan pertanyaan bisnis
+          4) Mengembangkan dashboard analitik
+          5) Mengembangkan model prediksi jika relevan
+          6) Menyediakan hasil analisis untuk diintegrasikan ke aplikasi
+        c. AI Full-Stack Developer:
+          1) Mengembangkan frontend dan backend
+          2) Merancang database
+          3) Mengembangkan autentikasi dan otorisasi
+          4) Mengintegrasikan layanan AI dan Data Science
+          5) Mengembangkan sistem pencatatan keuangan
+          6) Mengintegrasikan seluruh komponen menjadi aplikasi web
+
+2. Profil dan Kondisi Bisnis Adiskirani Bakery
+    2.1 Kondisi Operasional
+        a. Adiskirani Bakery sebelumnya memiliki outlet fisik
+        b. Outlet tersebut sudah dibongkar
+        c. Alasan pembongkaran:
+           1) Keterbatasan biaya
+           2) Menurunnya daya beli masyarakat sekitar
+           3) Kondisi pasar Business-to-Consumer (B2C) di lokasi tersebut kurang menguntungkan
+        d. Saat ini Adiskirani Bakery tidak memiliki outlet fisik
+        e. Adiskirani Bakery lebih berfokus pada pasar Business-to-Business (B2B)
+        f. Adiskirani Bakery tetap memiliki penjualan melalui kanal B2C
+
+    2.2 Kanal Penjualan
+        a. Bazar dan event
+           1) Adiskirani Bakery mengikuti bazar atau event yang diselenggarakan oleh instansi pemerintah, perusahaan, atau pihak penyelenggara lainnya
+           2) Penjualan dilakukan secara langsung di booth
+           3) Akses Adiskirani Bakery ke event kebanyakan dari koneksi pribadi ke owner
+           4) SPG dapat bertugas menjaga booth dan mencatat transaksi penjualan
+           5) Penjualan harus dicatat setiap kali transaksi terjadi, bukan hanya direkap pada akhir event
+        b. Transmart
+           1) Adiskirani Bakery memiliki kerja sama resmi dengan transmart
+           2) Produk Adiskirani Bakery dipasarkan di beberapa lokasi transmart
+           3) Adiskirani Bakery menjual produk dengan harga rendah dibandingkan harga jual langsung kepada konsumen (untuk keperluan pembuatan model, harga dibuat seragam. harga lebih murah hanya untuk analisis data science)
+           4) Adiskirani Bakery menerima laporan penjualan dari Transmart secara berkala
+           5) Telah dikonfirmasi bahwa produk dititipkan melalui sistem konsinyasi, bukan dijual langsung kepada Transmart
+           6) Retur atau produk rusak dapat terjadi
+           7) Penanganan retur dan penyesuaian penjualan belum dirancang
+        c. WhatsApp
+           1) Pelanggan dapat menghubungi Adiskirani Bakery melalui WhatsApp
+           2) Setelah kesepakatan tercapai, transaksi dilakukan
+        d. Platform B2C
+           Adiskirani Bakery menggunakan atau memiliki kanal penjualan melalui:
+           1) GoFood
+           2) GrabFood
+           3) ShopeeFood
+           Catatan:
+           1) Data penjualan dari platform tersebut tidak tersedia
+           2) Biaya layanan dan nominal pencairan platrform tidak digunakan dalam MVP
+
+3. Permasalahan Bisnis
+    Terdapat tiga permasalahan utama yang sudah dikonfirmasi oleh owner melalui wawancara.
+    Ketiganya dianggap mendesak oleh owner dan dimasukkan ke dalam Minimum Viable Product.
+
+    3.1 Belum Memiliki Landing Page
+        Kondisi saat ini:
+        a. Adiskirani Bakery belum memiliki landing page resmi
+        b. Adiskirani Bakery membutuhkan media digital untuk memperkenalkan bisnis
+        c. Calon mitra bisnis membutuhkan informasi yang dapat meningkatkan kepercayaan terhadap Adiskirani Bakery
+        d. Kebutuhan landing page awalnya berfokus pada B2B
+        e. Setelah wawancara kedua, cakupannya diperluas agar dapat melayani kebutuhan B2C
+        f. Landing page akan memiliki beberapa section, diantaranya:
+           1) Produk Terlaris
+           2) Katalog Produk
+           3) Event
+           4) Media Sosial
+           5) Testimoni Pelanggan
+           6) Lokasi Central Kitchen
+           7) Snack Box
+           8) Kontak
+           9) Chatbot
+        Dampak:
+        a. Calon mitra kesulitan memperoleh informasi mengenai Adiskirani Bakery secara terpusat
+        b. Adiskirani Bakery belum memiliki portofolio digital yang memadai
+        c. Calon pelanggan belum memiliki media resmi untuk melihat produk dan informasi bisnis
+
+    3.2 Pencatatan Keuangan Masih Manual
+        Kondisi saat ini:
+        a. Pencatatan keuangan belum terintegrasi
+        b. Data digital yang tersedia:
+           1) Invoice Transmart
+           2) Riwayat transaksi QRIS (tidak bisa dipakai)
+           3) Riwayat transfer bank (tidak bisa dipakai)
+        c. Data lainnya masih dicatat secara manual menggunakan buku bertabel
+        d. Buku pencatatan digunakan ketika Adiskirani Bakery mengikuti event
+        e. Struktur tabel pencatatan manual:
+           1) Nomor
+           2) Produk
+           3) Quantity
+           4) Harga
+           5) Jumlah
+           6) Tanggal pada setiap halaman
+        f. Pengeluaran belum dicatat dengan baik
+        g. Data pengeluaran yang tersedia hanya berasal dari bulan Februari dan Maret 2026, itupun tidak lengkap 
+        h. Mulai sekarang owner berencana mencatat pengeluaran dan pemasukan setiap hari
+        
+        Dampak:
+        a. Data keuangan tersebar di berbagai sumber
+        b. Rekap transaksi
+        c. Pengeluaran sulit ditelusuri
+        d. Perhitungan keuntungan bisnis menjadi sulit
+        e. Data historis belum terstruktur untuk analisis lebih lanjut
+
+    3.3 Belum Memiliki Dashboard Analitik
+        Kondisi saat ini:
+        a. Adiskirani Bakery belum memiliki dashboard analitik
+        b. Owner membutuhkan media untuk memahami kondisi bisnis melalui data
+        c. Data historis penjualan tersedia, tetapi tersebar di berbagai sumber
+        d. Owner meyakini data yng tersedia cukup untuk dianalisis
+        e. Owner sudah mengunggah data historis ke Google Drive
+        f. Tim Data Science sudah merapikan data ke dalam format terstandar
+        
+        Kebutuhan:
+        a. Memahami performa bisnis
+        b. Memantai penjualan
+        c. Membandingkan performa berdasarkan dimensi yang relevan
+        d. Memperoleh informasi yang dapat membantu pengambilan keputusan
+        
+        Catatan:
+        a. Metrik dashboard belum ditentukan
+        b. Dimensi analisis belum ditentukan
+        c. Kebutuhan prediksi dan rekomendasi belum ditentukan
+        d. Kebutuhan prediksi akan ditentukan berdasarkan data yang sudah dikumpulkan oleh tim Data Science dalam bentuk Dataset
+
+4. Solusi dan Fitur Sistem
+    Sistem direncanakan memiliki 3 fitur utama, yaitu landing page, pencatatan keuangan, dan dashboard analitik
+    4.1 Landing Page
+        Karakteristik:
+        a. Bersifat publik
+        b. Tidak membutuhkan login
+        c. Ditujukan kepada calon pelanggan B2B maupun B2C
+        d. Berfungsi sebagai media informasi dan portofolio digital Adiskirani Bakery
+        e. Tidak menyediakan transaksi langsung
+        
+        Section yang sudah direncanakan:
+        a. Produk Terlaris
+        b. Katalog Produk
+        c. Event
+        d. Media Sosial
+        e. Testimoni Pelanggan
+        f. Lokasi Central Kitchen
+        g. Snack Box
+        h. Kontak
+        i. Chatbot
+        
+        Ruang lingkup pertanyaan chatbot:
+        a. Informasi produk
+        b. Harga produk
+        c. Paket snack box
+        d. Lokasi central kitchen
+        e. Informasi pemesanan
+        f. Informasi bisnis Adiskirani Bakery lainnya yang relevan
+        
+        Ketentuan:
+        a. Informasi chatbot harus mengikuti data terbaru di database
+        b. Informasi yang digunakan mencakup katalog, harga, dan ketersediaan
+        c. Sistem direncanakan menggunakan RAG
+        d. Chatbot harus menolak pertanyaan di luar konteks bisnis Adiskirani Bakery
+        e. Chatbot harus tetap memiliki batasan konteks yang jelas
+        f. Pengelolaan FAQ:
+           1) Sistem menyediakan fitur pengelolaan FAQ sebagai sumber pengetahuan chatbot
+           2) FAQ disimpan dalam database pada tabel faq
+           3) Data FAQ digunakan sebagai salah satu sumber informasi dalam sistem RAG
+           4) Peribahan data FAQ harus tercermin pada sumber informasi yang digunakan RAG agar jawaban chatbot tetap relevan
+        g. Landing page harus tetap dapat digunakan ketika chatbot mengalami kegagalan
+        h. Kegagalan chatbot tidak boleh mengganggu fitur utama landing page
+
+        Aset digital yang sudah tersedia:
+        a. Foto Produk
+        b. Logo
+        c. Katalog
+        d. dokumentasi event
+
+    4.2 Hak Akses dan Pembagian Role
+        Sistem memiliki tiga role pengguna, yaitu Superadmin, Admin, dan SPG. Setiap role memiliki hak akses dan tanggung jawab yang berbeda sesuai dengan kebutuhan operasional Adiskirani Bakery.
+
+        a. Superadmin (Owner)
+           Superadmin merupakan pemegang akses tertinggi dalam sistem. Superadmin memiliki hak untuk mengakses seluruh data dan menjalankan seluruh proses CRUD. Tanggung jawab Superadmin meliputi:
+           1) Mengelola seluruh konten landing page
+           2) Mengelola akun pengguna dan hak akses
+           3) Mencatat dan mengelola data penjualan serta pengeluaran
+           4) Mengakses dashboard keuangan dan analitik
+           5) Menambahkan stok produk untuk kebutuhan event melalui sistem
+           6) Memantau aktivitas dan konfirmasi stok dari SPG
+           7) Mengelola daftar event yang ada
+           8) Melakukan assign SPG ke suatu event, lalu ke periode event yang telah dibuat. Untuk konteks tambahan, ketika Superadmin membuat suatu event, misal event A, maka di dalamnya ada pilihan untuk periode eventnya. Misalkan, SPG bernama Liza akan di-assign ke event A periode 10 - 12 Januari 2026. 
+           9) Mengelola FAQ yang digunakan sebagai sumber pengetahuan chatbot melalui operasi CRUD
+           
+           Halaman yang dapat diakses oleh Superadmin adalah:
+           1) Dashboard analitik
+           2) Landing page:
+              a) Produk -> CRUD katalog produk
+              b) Paket Snack Box -> CRUD paket snack box
+              c) Event -> CRUD informasi event
+              d) Testimoni/Feedback -> Mengelola feedback
+           3) Keuangan:
+              a) Pemasukan/Penjualan -> Mengelola pemasukan
+              b) Pengeluaran -> Mengelola pengeluaran
+           4) Event & Stok:
+              a) Manajemen event (termasuk di dalamnya penugasan SPG) -> CRUD event
+              b) Pengiriman/Penambahan Stok -> Mencatat jumlah stok yang ditambahkan untuk event
+              c) Konfirmasi Stok -> Memantau status konfirmasi penerimaan stok oleh SPG
+           5) Managemen Pengguna -> CRUD akun
+           6) Audit Log -> Melihat aktivitas dalam sistem
+           7) Pengaturan Akun
+           8) Manajemen FAQ -> CRUD data FAQ sebagai sumber pengetahuan chatbot RAG
+
+        b. Admin
+           Admin bertanggung jawab mengatur visibilitas konten yang ditampilkan pada landing page. Admin hanya memiliki akses untuk mengubah status visibilitas konten, seperti menampilkan atau menyembunyikan konten yang telah dibuat oleh Superadmin.
+           Admin tidak memiliki hak untuk menambahkan, mengubah, atau menghapus data konten. Admin juga tidak dapat mengakses data internal lainnya, seperti penjualan, pengeluaran, stok, serta dashboard keuangan dan analitik. Setiap perubahan visibilitas konten oleh Admin harus memperoleh persetujuan Owner melalui komunikasi di luar sistem. Sistem tidak menyediakan mekanisme persetujuan internal.
+
+           Halaman yang dapat diakses oleh Admin adalah:
+           1) Visibilitas landing page:
+              a) Produk -> Mengatur visibilitas produk
+              b) Paket snack box -> Mengatur visibilitas paket snack box
+              c) Event -> Mengatur visibilitas event
+              d) Testimoni/Feedback -> Mengatur visibilitas testimoni
+            2) Pengaturan akun
+
+        c. SPG
+           SPG bertanggung jawab dalam pencatatan penjualan dan konfirmasi penerimaan stok selama event berlangsung. Tanggung jawab SPG meliputi:
+           1) Mencatat transaksi penjualan produk selama event berlangsung
+           2) Melihat seluruh riwayat transaksi penjualan pada event dan periode penugasan yang bersangkutan.
+           3) Mengonfirmasi penerimaan stok produk ketika barang yang telah ditambahkan oleh Superadmin melalui sistem tiba di booth event
+
+           SPG tidak memiliki hak untuk menambahkan atau mengubah jumlah stok secara langsung. SPG juga tidak dapat mengakses data keuangan secara keseluruhan, pengeluaran, dashboard analitik, maupun fitur pengelolaan lainnya di luar tanggug jawabnya. Jika ada pengeluaran ketika event berlangsung, SPG diharuskan untuk menghubungi owner agar orang yang memiliki akses Superadmin bisa mencatat pengeluaran itu di sistem.
+
+           Halaman yang dapat diakses oleh SPG adalah:
+           1) Dashboard (berbeda dengan dashboard Superadmin) -> Melihat ringkasan event dan penjualan pada periode ketika SPG tersebut ditugaskan
+           2) Event saya -> Melihat event dan periode penugasan
+           3) Input penjualan -> Mencatat transaksi penjualan saat event
+           4) Riwayat penjualan -> Melihat transaksi yang dicatat selama periode penugasan
+           5) Konfirmasi stok -> Mengonfirmasi barang yang dikirim owner sudah tiba di booth dan mencatat barang aktual yang sampai ke booth
+           6) Pengaturan akun
+
+5. Data dan Kebutuhan Pengolahan Data
+    5.1 Data Historis
+        a. Owner memiliki data historis penjualan
+        b. Data Tersebar di beberapa sumber
+        c. Data diyakini cukup untuk mendukung analisis bisnis
+        d. Data sudah diunggah ke Google Drive
+        e. Tim Data Science bertanggung jawab menyatukan dan merapikan data
+    
+    5.2 Informasi Data yang Tersedia
+        Data historis mencakup:
+        a. Nama produk
+        b. Kuantitas
+        c. Harga
+        d. Tanggal
+        e. Kanal Penjualan
+
+        Data lain:
+        a. Invoice Transmart
+        b. Riwayat QRIS
+        c. Riwayat transfer bank
+        d. Data penjualan dari platform B2C
+        e. Data pengeluaran untuk periode tertentu
+
+    5.3 Data Produk
+        a. Nama Produk
+        b. Harga jual
+        c. HPP
+        d. Informasi produk
+        e. Ketersediaan produk
+        f. Foto produk
+    
+    5.4 Data Transaksi
+        Potensi atribut:
+        a. ID transaksi
+        b. Tanggal transaksi
+        c. produk
+        d. Kuantitas
+        e. Harga
+        f. Total transaksi
+        g. Kanal penjualan
+        h. Event atau lokasi jika relevan
+        i. Pengguna yang mencatat transaksi
+        j. Kategori transaksi
+    
+    5.5 Data Pengeluaran
+        a. Tanggal
+        b. Kategori pengeluaran
+        c. Nominal
+        d. Keterangan jika diperlukan
+        e. Pengguna yang mencatat
+        Bukti transaksi tidak diwajibkan dalam MVP
+
+    5.6 Data FAQ
+        a. Pertanyaan
+        b. Jawaban
+        c. Status aktif/nonaktif
+        d. Waktu dibuat
+        e. Waktu diperbarui
+
+    5.7 Prinsip Pengolahan Data
+        a. Mengutamakan data primer dari Adiskirani Bakery
+        b. Melakukan data wrangling sebelum analisis
+        c. Menyeragamkan format data
+        d. Memeriksa konsistensi data
+        e. Memeriksa kelengkapan data
+        f. Memeriksa nilai yang tidak valid
+        g. Memastikan hasil analisis sesuai dengan data sumber
+        h. Menyampaikan keterbatasan data secara transparan
+        i. Tidak membuat prediksi atau rekomendasi tanpa dasar data yang memadai
+
+6. Hal-Hal yang Masih Terbuka
+    Informasi berikut belum memiliki keputusan final dan tidak boleh dianggap sebagai fakta yang sudah dikonfirmasi.
+    6.1 Retur dan Produk Rusak
+        a. Retur atau produk rusak dapat terjadi
+        b. Belum ada mekanisme pencatatan
+        c. Perlu ditentukan apakah sistem membutuhkan jenis transaksi retur atau penyesuaian
+        d. Perlu dipastikan dampaknya terhadap pemasukan, HPP, dan keuntungan
+      
+    6.2 Dashboard Analitik
+        a. Metrik belum ditentukan
+        b. Pertanyaan bisnis belum difinalisasi dan bisa bertambah kedepannya. Adapun saat ini sudah ada 5 yang dibuat, yaitu:
+           1) Apa 5 produk dengan total penjualan tertinggi (berdasarkan kuantitas) di transmart A pada Q3 tahun 2026?
+           2) Berdasarkan data feedback selama 6 bulan terakhir, apa saja 5 sumber informasi yang paling banyak mendatangkan pelanggan agar anggaran promosi dapat difokuskan pada sumber yang paling efektif?
+           3) Apa top 5 kategori produk (salt bread, sourdough, dll) dengan total penjualan tertinggi (berdasarkan kuantitas) sepanjang tahun 2026?
+           4) Apa saja 5 produk yang menyumbang keuntungan terbesar dan terkecil berdasarkan data penjualan sepanjang tahun 2026?
+           5) Apa 3 instansi dengan pesanan terbanyak sepanjang tahun 2026, sehingga tim marketing bisa memberikan penawaran spesial untuk ketiga instansi tersebut
+        c. Kebutuhan prediksi belum ditentukan
+        d. Kebutuhan rekomendasi belum ditentukan
+        e. Menunggu hasil analisis tim Data Science
+    
+    6.3 Admin
+        a. Belum ada orang yang ditunjuk sebagai Admin
+        b. Role admin masih berupa kebutuhan antisipatif
+        c. Belum ada kepastian kapan role ini mulai digunakan
+    
+    6.4 Chatbot
+        a. Chatbot bukan kebutuhan langsung dari owner
+        b. Fitur dimasukkan untuk memenuhi checklist Next-Gen AI Engineer
+        c. Batasan implementasi perlu dijaga agar tidak mengganggu MVP
+        d. Perlu dipastikan sumber data dan mekanisme sinkronisasi dengan database
+        e. FAQ yang dikelola oleh Superadmin melalui sistem menjadi salah satu sumber pengetahuan chatbot RAG.
+
+7. Catatan Kritis dan Batasan Proyek
+    7.1 Akurasi Perhitungan dan Keuntungan
+        a. Perhitungan laba tidak dianggap sepenuhnya akurat
+        b. HPP diasumsikan tetap
+        c. Biaya layanan platform B2C belum tentu diperhitungkan
+        d. Retur dan produk rusak belum memiliki mekanisme pencatatan
+        e. Hasil perhitungan keuntungan harus diberi label estimasi jika komponen biaya belum lengkap
+        f. Jangan menyebut angka estimasi sebagai keuntungan aktual
+
+    7.2 Prioritas Chatbot
+        a. Chatbot memiliki justifikasi bisnis yang lebih lemah dibandingkan 3 fitur MVP
+        b. Owner tidak secara langsung meminta chatbot
+        c. Sinkronisasi informasi dengan database menjadi kebutuhan penting
+        d. Chatbot tidak boleh menghambar pengembangan landing page, pencatatan keuangan, dan dashboard
+        e. Jika waktu terbatas, chatbot harus memiliki implementasi minimal yang tetap memenuhi kebutuhan teknis
+
+    7.3 Prioritas Pengembangan
+        a. semua masalah dianggap mendesak oleh owner
+        b. Namun, tim tetap harus membuat urutan pengerjaan internal
+        c. Pengembangan autentikasi dan pencatatan keuangan dapat diprioritaskan karena dashboard bergantung pada data transaksi
+        d. Dashboard dikembangkan setelah struktur data dan kebutuhan analitik lebih jelas
+        e. Landing page dapat dikembangkan secara paralel jika pembagian pekerjaan memungkinkan
+        f. Chatbot sebaiknya tidak menjadi penghambat penyelesaian fitur utama
+
+    7.4 Persetujuan Admin
+        a. Persetujuan owner dilakukan di luar sistem
+        b. Tidak ada mekanisme approval internal
+        c. Audit log tidak dapat membuktikan bahwa owner sudah menyetujui perubahan
+        d. Hal ini merupakan keterbatasan yang dapat diterima untuk MVP
+        e. Jangan menganggap sistem memiliki fitur approval jika memang tidak diimplementasikan
+
+    7.5 Keterbatasan Waktu
+        a. Durasi pengembangan sekitar 1 bulan
+        b. Tidak semua kemungkinan kebutuhan bisnis dapat diimplementasikan
+        c. Fokus pada 3 masalah utama yang sudah dikonfirmasi
+        d. Hindari menambah fitur yang tidak memiliki urgensi atau dasar kebutuhan jelas
+        e. Utamakan fungsionalitas, integrasi, keandalan, dan kemudahan penggunaan
+
+8. Checklist Tech Stack Asah
+    Bagian ini merupakan persyaratan program Asah. Bedakan antara fitur yang memang dibutuhkan Adiskirani Bakery dan fitur yang harus dikembangkan untuk memenuhi checklist program.
+    8.1 AI Full-Stack Developer
+        a. Main Quest
+           1) Menyelesaikan satu masalah UMKM yang jelas untuk pengguna spesifik
+           2) Memiliki minimal 2 fitur utama yang menjawab masalah tersebut
+           3) Memberikan hasil sesuai aksi atau input pengguna
+           4) Menampilkan indikator yang jelas ketika aksi:
+              a) Berhasil
+              b) Gagal
+              c) Sedang diproses
+           5) Mudah digunakan oleh pelaku UMKM
+           6) Menyediakan panduan penggunaan yang jelas
+           7) Dapat diakses secara publik melalui browser
+           8) Mendukung penggunaan melalui perangkat mobile
+        b. Side Quest - Arsitektur dan Teknologi
+           1) Frontend dan backend dibangun secara terpisah (decoupled)
+           2) Frontend dan backend saling terhubung melalui networking call
+           3) Frontend menggunakan module bundler seperti:
+              a) Vite
+              b) Webpack
+           4) Backend menggunakan Express
+           5) URL API mengikuti konvensi REST API, misalnya:
+              a) /api/v1/resource
+           6) Antarmuka menggunakan CSS framework
+           7) Antarmuka menggunakan UI component modern
+           8) Networking call menggunakan Axios
+        c. Side Quest - Integrasi Data
+           1) Data tersimpan secara persisten.
+           2) Layanan Generative AI diakses melalui backend
+           3) Frontend tidak mengakses API Generative AI secara langsung
+           4) Hasil tim Data Science ditampilkan pada fitur yang relevan
+           5) Riwayat hasil layanan Generative AI disimpan di database
+        d. Side Quest - Keandalan
+           1) Backend memvalidasi data menggunakan schema validation
+           2) Contoh library:
+              a) Joi
+           3) Aplikasi menangani kegagalan dengan pesan yang jelas.
+           4) Sistem menangani kegagalan layanan Generative AI.
+           5) Sistem menangani kegagalan layanan Data Science.
+        e. Side Quest - Pengalaman Pengguna
+           1) Mockup dibuat sebelum pengembangan.
+           2) Antarmuka responsif.
+           3) Keputusan desain memiliki alasan yang jelas.
+           4) Tidak sekadar menggunakan template umum tanpa penyesuaian.
+        f. Side Quest - Kolaborasi dan Distribusi
+           1) Riwaya kode dikelola menggunakan Git
+           2) Kode disimpan di Github atau layanan sejenis
+           3) Kontrak API atau format data disepakati bersama:
+              a) Tim Next-Gen AI Engineer
+              b) Tim Data Science Specialist
+           4) Kontak harus disepakati sebelum pengembangan integrasi dimulai
+           5) Aplikasi di-deploy ke layanan gratis. Contoh layanan:
+              a) Netlify
+              b) Render
+              c) Neon
+              d) Cloudflare Pages
+        
+    8.2 Next-Gen AI Engineer
+        a. Main Quest - Model AI
+           1) Menjelaskan permasalahan yang ingin diselesaikan oleh model AI di README
+           2) Membangun model AI berdasarkan karakteristik data dari tim Data Science
+           3) Menerapkan preprocessing data sebelum model digunakan
+           4) Boleh menggunakan:
+              a) API data publik
+              b) Sumber data eksternal
+              c) Dataset
+              d) Library
+              e) Data pribadi yang diizinkan
+           5) Mencantumkan sumber setiap item yang digunakan di README
+           6) Membandingkan minimal dua model atau konfigurasi
+           7) Menggunakan metrik evaluasi yang sama untuk perbandingan
+           8) Menyediakan tabel perbandingan hasil
+           9) Menjelaskan alasan pemilihan model terbaik
+        b. Main Quest - Generative AI
+           1) Membangun fitur tambahan Generative AI
+           2) Memanfaatkan API model proprietary seperti:
+              a) ChatGPT
+              b) Gemini
+              c) Model proprietary lainnya
+           3) Mengembangkan fitur chatbot untuk menjawab pertanyaan seputar Adiskirani Bakery
+           4) Menjaga konteks jawaban tetap relevan dengan bisnis Adiskirani Bakery
+        c. Main Quest - Model Serving
+           1) Bekerja sama dengan tim Full-Stack
+           2) Mengembangkan REST API menggunakan:
+              a) FastAPI
+              b) Flask
+           3) API digunakan untuk serving model AI
+           4) Model harus dapat diakses secara online oleh backend aplikasi
+           5) Menyediakan layanan yang dapat diintegrasikan ke sistem utama
+        d. Side Quest - Pengembangan Model AI
+           1) Memeriksa keseimbangan jumlah data antarkelas
+           2) Menangani class imbalance jika ditemukan
+           3) Menjelaskan penanganannya di README
+           4) Menerapkan teknik peningkatan performa model, seperti:
+              a) Data augmentation
+              b) Hyperparameter tuning
+           5) Menjelaskan pengaruh teknik tersebut terhadap hasil model
+           6) Menguji model menggunakan data uji yang disisihkan
+           7) Memilih metrik evaluasi sesuai jenis tugas. Contoh:
+              a) F1-score untuk klasifikasi
+              b) Precision@k untuk rekomendasi
+           8) Menuliskan hasil evaluasi di README
+        e. Side Quest - Model Tambahan
+           1) Melatih model tambahan yang melengkapi solusi utama
+           2) Contoh:
+              a) Model kelasifikasi sentimen ulasan pelanggan
+           3) Model sentimen minimal memiliki dua kelas:
+              a) Positif
+              b) Negatif
+           4) Hasil model dapat ditambahkan pada aplikasi web atau dashboard Data Science
+        f. Side Quest - Fitur AI Generatif dan Model Pendukung
+           Sistem RAG
+           1) Membangun sistem Retrieval-Augmented Generation (RAG)
+           2) Sistem terdiri dari:
+              a) Model generation
+              b) Model embedding
+              c) Vector database
+           3) Model generation dapat menggunakan:
+              a) API proprietary
+              b) SLM/LLM open-source yang di-host secara lokal
+           4) Model embedding digunakan untuk mengubah informasi menjadi representasi vektor
+           5) Vector database digunakan untuk menyimpan dan mengambil informasi berdasarkan kemiripan semantik
+           6) Contoh vector database:
+              a) ChromaDB
+              b) FAISS
+              c) Pinecone
+              d) Weaviate
+           
+           Klasifikasi Intent
+           1) Menggunakan model AI yang dilatih pada Main Quest sebagai model klasifikasi intent
+           2) Minimal memiliki empat intent
+           3) Contoh intent:
+              a) Tanya produk
+              b) Pemesanan
+              c) Keluhan
+              d) Lainnya
+           4) Hasil klasifikasi digunakan untuk mengerahkan pertanyaan ke alur yang sesuai
+           5) Contoh:
+              a) Pertanyaan produk dijawab menggunakan RAG
+              b) Keluhan diteruskan kepada pemilik usaha
+              c) Pertanyaan di luar konteks ditolak secara sopan atau diarahkan sesuai kebutuhan
+
+           Prompt Engineering
+           1) Menyusun prompt terstruktur
+           2) Menggunakan prompt template
+           3) Menggunakan few-shot prompting jika diperlukan
+           4) Menjaga konsistensi gaya bahasa chatbot
+           5) Memastikan jawaban sesuai konteks bisnis Adiskirani Bakery
+
+           Pembatasan Chatbot
+           1) Chatbot harus menolak pertanyaan di luar konteks bisnis Adiskirani Bakery dengan sopan
+           2) Menguji chatbot menggunakan minimal sepuluh pertanyaan di luar konteks
+           3) Mencatat hasil pengujian di README
+
+           Catatan Model Open-Source:
+           1) Menggunakan SLM/LLM open-source yang di-host secara lokal mendapatkan nilai tambah
+           2) Model harus dapat diakses oleh tim Web (Full-Stack)
+           3) Pemilihan model harus mempertimbangkan sumber daya dan kemampuan deployment
+
+        g. Side Quest - Penyajian dan Integrasi Model AI
+           1) Menyepakati kontrak API dengan tim Full-Stack
+           2) Kontrak API meliputi:
+              a) Endpoint
+              b) Format request
+              c) Format response
+              d) Kode error
+           3) Kontrak disepakati sebelum implementasi integrasi
+           4) Menangani input tidak valid
+           5) menangani kegagalan layanan AI
+           6) Menangani API model generatif yang lambat
+           7) Menangani batas kuota gratis API
+           8) Memberikan pesan kesalahan yang jelas kepada pengguna
+           9) Mengintegrasikan solusi AI ke kanal yang digunakan UMKM'
+           10) Contoh:
+               a) Telegram
+               b) WhatsApp
+           11) WhatsApp dapat menggunakan nomor uji gratis dari WhatsApp Cloud API
+           12) Menyediakan dokumentasi API
+           13) Dokumentasi dapat dicoba langsung menggunakan:
+               a) Swagger
+               b) OpenAPI
+    
+    8.3 Data Science Specialist
+        a. Main Quest - Identifikasi dan Analisis Masalah
+           1) Mengidentifikasi permasalahan UMKM bersama seluruh tim
+           2) Memahami kebutuhan bisnis owner
+           3) Menjelaskan peran data dalam solusi
+           4) Merumuskan pertanyaan bisnis yang dapat dijawab menggunakan data
+           5) Memastikan pertanyaan bisnis relevan dengan kebutuhan Adiskirani Bakery
+        
+        b. Main Quest - Data Wrangling
+           1) Melakukan seluruh tahapan pengolahan data
+           2) Mengumpulkan data dari sumber yang tersedia
+           3) Memahami struktur data
+           4) Membersihkan data
+           5) Menangani data kosong
+           6) Menangani duplikasi
+           7) Menangani format yang tidak konsisten
+           8) Menyeragamkan format data
+           9) Melakukan validasi data
+           10) Menyiapkan dataset untuk analisis
+
+        c. Main Quest - Analisis Data
+           1) Mengolah data untuk menjawab pertanyaan bisnis
+           2) Melakukan analisis seuai kebutuhan
+           3) Menjelaskan metode analisis
+           4) Menjelaskan hasil analisis
+           5) Menyampaikan interpretasi hasil secara objektif
+           6) Memastikan hasil analisis dapat dipertanggungjawabkan
+
+        d. Main Quest - Penyajian Temuan
+           a) Menyajikan temuan dengan bahasa yang mudah dipahami
+           b) Menyediakan rekomendasi yang relevan
+           c) Menghubungkan hasil analisis dengan keputusan bisnis
+           d) Tidak memberikan rekomendasi tanpa dukungan data
+           e) Menjelaskan keterbatasan hasil analisis
+
+        e. Main Quest - Penyediaan Data untuk Tim
+           a) Menyediakan data yang dapat digunakan anggota tim lain
+           b) Menyediakan hasil analisis dalam format yang sesuai
+           c) Menjelaskan struktur data
+           d) Menjelaskan cara menggunakan data
+           e) Memastikan data dan hasil analisis telah diperiksa sebelum diintegrasikan
+           f) Berkoordinasi dengan tim Full-Stack dan AI Engineer
+
+        f. Side Quest - Dashboard Analitik
+           a) Mengembangkan dashboard interaktif
+           b) Dapat menggunakan Streamlit atau teknologi visualisasi lainnya
+           c) Menampilkan indikator bisnis
+           d) Menyediakan filter yang relevan
+           e) Mempermudah owner memahami kondisi bisnis
+           f) Menyediakan pembaruan data melalui:
+              1) Unggahan file
+              2) Koneksi ke sumber data
+           g) Mengutamakan penggunaan data primer dari Adiskirani Bakery
+           h) Jika data primer tidak tersedia atau belum cukup, dapat menggunakan data dummy atau data publik yang sesuai karakteristik data asli
+           i) Mengintegrasikan dashboard ke aplikasi web bersama tim Full-Stack
+           
+        g. Side Quest - Model Prediksi
+           a) Mengembangkan model yang sesuai kebutuhan fitur
+           b) Jenis model yang dapat dikembangkan:
+              1) Classification
+              2) Regression
+              3) Forecasting
+              4) Model lainnya sesuai kebutuhan bisnis
+           c) Melakukan feature engineering
+           d) Mengevaluasi pengaruh feature engineering terhadap performa model
+           e) Menguji model menggunakan data yang tidak digunakan saat training
+           f) Menggunakan pembagian data dan metrik evaluasi yang sesuai
+           g) Membandingkan hasil beberapa model jika lebih dari satu model yang dikembangkan
+           h) Menjelaskan keterbatasan model
+           i) Mengintegrasikan hasil prediksi ke aplikasi web bersama tim Full-Stack
+
+9. Prinsip Pengembangan dan Koordinasi Antar-Tim
+    9.1 Prinsip Umum
+        a. Kebutuhan bisnis harus menjadi dasar pengembangan
+        b. Checklist Asah harus dipenuhi tanpa mengorbankan kebutuhan utama UMKM
+        c. Bedakan fitur yang dibutuhkan owner dengan fitur tambahan untuk memenuhi checklist
+        d. Hindari asumsi yang tidak didukung hasil wawancara
+        e. Jika informasi belum jelas, tanyakan atau tandai sebagai hal yang belum dikonfirmasi
+        f. Prioritaskan fitur yang dapat diselesaikan dan digunakan dalam waktu yang tersedia
+        g. Pastikan seluruh fitur terintegrasi, bukan berjalan sendiri-sendiri
+
+    9.2 Koordinasi Full-Stack dan AI Engineer
+        Hal yang harus disepakati:
+        a. Endpoint API
+        b. Metode HTTP
+        c. Format request
+        d. Format response
+        e. Struktur error
+        f. Autentikasi layanan
+        g. Mekanisme komunikasi backend aplikasi dengan layanan AI
+        h. Mekanisme penyimpanan riwayat hasil Generative AI
+        i. Mekanisme timeout dan penanganan kegagalan
+        j. Sumber informasi chatbot
+
+    9.3 Koordinasi Full-Stack dan Data Science
+        Hal yang harus disepakati:
+        a. Struktur dataset
+        b. Nama kolom
+        c. Tipe data
+        d. Format tanggal
+        e. Definisi metrik
+        f. Format hasil analisis
+        g. Mekanisme pembaruan
+        h. Endpoint atau format integrasi
+        i. Mekanisme filter dashboard
+        j. Cara menampilkan hasil analisis pada aplikasi web
+
+    9.4 Koordinasi AI Engineer dan Data Science
+        Hal yang harus disepakati:
+        a. Ketersediaan data untuk model
+        b. Struktur dan karakteristik dataset
+        c. Label atau target model
+        d. Proses preprocessing
+        e. Pembagian data training, validation, dan testing
+        f. Format input dan output model
+        g. Metrik evaluasi
+        h. Cara model diakses oleh sistem lain
+    
+10. Dataset yang Sudah Dibuat Tim Data Science (dapat berubah jika ada revisi)
+    10.1 Kolom yang Ada Beserta Penjelasannya:
+         a. Qty_total (target) berisi sum qty untuk semua cabang untuk produk itu di pekan t -> target yang diprediksi
+         b. lag_1, 2, 3, 4 berisi sum penjualan produk pada 1, 2, 3, 4 pekan lalu -> Penjualan pekan depan paling mirip dengan beberapa pekan terakhir. Ini sinyal terkuat di data time series.
+         c. roll_mean_4, roll_mean_8 berisi rata-rata penjualan 4 dan 8 pekan terakhir -> Penjualan mingguan naik-turun secara acak. Rata-rata meredam keacakan dan memberi "level normal".
+         d. roll_std_4 berisi simpangan baku 4 pekan terakhir -> Produk yang stabil (std kecil) dan produk yang menyebar (std besar) perlu diprediksi dengan keyakinan berbeda.
+         e. tren berisi roll_mean_4 dibagi dengan roll_mean_8 -> Di atas 1 berarti penjualan sedang naik, di bawah 1 turun. Model jadi tahu arah, bukan hanya level.
+         f. pekan_nol_8 berisi jumlah pekan bernilai 0 dalam 8 pekan terakhir -> Membedakan produk yang laku rutin dari yang sering kosong
+         g. cabang_jual_produk berisi jumlah cabang yang menjual produk itu pada pekan target -> Total penjualan sangat bergantung pada jumlah toko. Tanpa ini, penambahan cabang terbaca sebagai kenaikan .
+         h. qty_per_cabang_lag1 berisi lag_1 dibagi jumlah cabang pekan lalu -> Permintaan per toko, terlepas dari jumlah toko.
+         i. product_id berisi kode_produk -> Tiap produk punya level penjualan tersendiri
+         j. category berisi kategori produk -> Produk baru atau jarang laku bisa meminjam pola kategori
+         k. umur_produk_mgg berisi pekan ke- berapa sejak produk pertama terjual -> Produk baru biasanya ada lonjakan awal, lalu stabil
+         l. sudah_ada_sejak_awal bernilai 1 jika produk sudah ada di 1 pekan pertama pada dataset -> Umur produk lama terpotong awal data, jadi perlu dibedakan dari produk yang benar-benar baru
+         m. pekan_gajian bernilai 1 jika dalam 1 pekan memuat tanggal 25 sampai akhir bulan atau tanggal 1
+         n. libur_nasional_pekan berisi jumlah libur hari kerja dalam 1 pekan -> Libur mengubah kunjungan ke mal
+         o. long_weekend bernilai 1 jika ada libur 3 hari atau lebih secara berturut-turut
+         p. libur_sekolah bernilai 1 untuk pekan libur sekolah (berasal dari data libur sekolah DKI Jakarta) -> Keluarga lebih banyak ke mal; mungkin menjelaskan lonjakan Juli 
+
+KONTEKS TAMBAHAN UNTUK RAG:
+1. Struktur Tabel FAQ
+   a. id -> Primary key
+   b. question -> Pertanyaan FAQ
+   c. answer -> Jawaban FAQ
+   d. is_active -> Menentukan apakah FAQ boleh digunakan sebagai konteks chatbot
+   e. created_at -> Waktu FAQ dibuat
+   f. updated_at -> Waktu FAQ terakhir diperbarui
+
+2. Model dan Teknologi
+   a. Backend utama     : Express.js
+   b. AI service        : FastAPI
+   c. Database utama    : PostgreSQL
+   d. Vector database   : Qdrant
+   e. Embedding model   : BAAI/bge-m3
+   f. LLM               : GLM-5.3 Flash
+   g. LLM provider      : Gonka Broker
+
+3. Arsitektur Sistem:
+   a. Frontend -> Antarmuka chatbot
+   b. Express.js -> Backend utama dan API gateway
+   c. PostgreSQL -> Database utama, termasuk penyimpanan FAQ
+   d. FastAPI -> AI Service yang mengelola pipeline RAG
+   e. Embedding model -> Mengubah pertanyaan dan FAQ menjadi representasi vektor
+   f. Qdrant -> Menyimpan embedding dan payload serta melakukan pencarian kemiripan
+   g. LLM -> Menghasilkan jawaban berdasarkan pertanyaan dan konteks hasil retrieval
+
+4. Alur RAG Saat Pengguna Menggunakan Chatbot:
+   a. Pengguna mengirimkan pertanyaan melalui frontend
+   b. Express.js menerima pertanyaan dan meneruskannya ke FastAPI
+   c. FastAPI menerima pertanyaan dan meminta embedding model mengubah pertanyaan menjadi vektor
+   d. FastAPI menggunakan vektor tersebut untuk melakukan similarity search pada Qdrant
+   e. Qdrant mengembalikan FAQ yang relevan beserta payload-nya
+   f. FastAPI memeriksa hasil retrieval dan menyiapkan konteks untuk LLM
+   g. FastAPI mengirimkan pertanyaan dan konteks ke hasil retrieval kepada LLM
+   h. LLM menyusun jawaban berdasarkan konteks yang diberikan
+   i. FastAPI menerima hasil generation dan mengembalikannya kepada Express.js
+   j. Express.js mengirimkan jawaban kepada frontend untuk ditampilkan kepada pengguna
+
+   Catatan: Retrieval dan generation tetap dikelola dalam FastAPI. Hasil retrieval tidak perlu dikembalikan ke Express.js terlebih dahulu.
+
+5. Alur FAQ Ingestion dan Sinkronisasi
+   5.1 CREATE FAQ
+       a. Superadmin mengisi form FAQ melalui frontend
+       b. Express.js melakukan validasi input
+       c. Express.js menyimpan FAQ ke PostgreSQL
+       d. Setelah penyimpanan berhasil, Express.js memicu sinkronisasi dengan mengirimkan identitas FAQ dan data FAQ terbaru kepada FastAPI
+       e. FastAPI meminta embedding model mengubah FAQ menjadi vektor
+       f. FastAPI menyimpan embedding beserta payload FAQ ke Qdrant
+       g. Sinkronisasi dinyatakan berhasil jika proses penyimpanan ke Qdrant berhasil
+   5.2 UPDATE FAQ
+       a. Superadmin memperbarui FAQ melalui frontend
+       b. Express.js memvalidasi perubahan
+       c. Express.js memperbarui data FAQ di PostgreSQL
+       d. Setelah pembaruan berhasil, Express.js mengirimkan identitas FAQ dan data terbaru kepada FastAPI
+       e. FastAPI membuat embedding baru dari FAQ yang diperbarui
+       f. FastAPI memperbarui point FAQ yang bersangkutan di Qdrant
+       g. Sinkronisasi dinyatakan berhasil jika proses pembaruan di Qdrant berhasil
+   5.3 Pengelolaan Status Aktif/Nonaktif:
+       a. FAQ dengan is_active = true boleh digunakan sebagai konteks chatbot
+       b. FAQ dengan is_active = false tidak boleh digunakan sebagai konteks
+       c. Perubahan status FAQ harus tercermin pada proses retrieval
+       d. Mekanisme sinkronisasi status aktif/nonaktif masih perlu ditentukan, misalnya memperbarui metadata payload Qdrant atau menghapus point yang tidak aktif
+       e. Penanganan DELETE FAQ juga perlu dirancang
+   5.4 Penanganan Kegagalan Sinkronisasi
+       a. PostgreSQL tetap menjadi sumber data utama
+       b. Kegagalan sinkronisasi ke Qdrant tidak boleh membuat data FAQ yang sudah berhasil disimpan di PostgreSQL hilang
+       c. Sistem perlu memiliki mekanisme pencatatan status sinkronisasi dan retry
+       d. Mekanisme sinkronisasi synchronous atau asynchronous masih perlu diputuskan
+       e. Jangan menganggap operasi PostgreSQL dan Qdrant sebagai satu transaksi atomik
+
+6. Prinsip Fleksibilitas Pipeline Model
+   Salah satu tujuan pengembangan adalah membangun pipeline RAG yang fleksibel agar dapat menggunakan dan menguji beberapa model embedding maupun API LLM.
+   6.1 Fleksibilitas Embedding Model
+       Embedding model awal yang digunakan adalah BAAI/bge-m3 melalui Gonka Broker.
+       Namun, embedding model dapat diganti berdasarkan ketersediaan resource, performa retrieval, dan kebutuhan deployment.
+       Prinsip yang perlu diterapkan:
+       a. Proses embedding dipisahkan dari proses retrieval dan generation
+       b. Pergantian embedding model tidak boleh mengharuskan perubahan besar pada keseluruhan pipeline
+       c. Pergantian embedding model mengharuskan pembuatan ulang embedding FAQ
+       d. Dimensi vektor dan konfigurasi collection Qdrant harus disesuaikan dengan embedding model yang digunakan
+       e. Vektor dari embedding model berbeda tidak boleh dicampur begitu saja dalam satu ruang vektor
+      
+   6.2 Fleksibilitas LLM
+       LLM awal yang digunakan adalah GLM-5.3-Flash melalui Gonka Broker.
+       Namun, provider dan model LLM dapat diganti berdasarkan kualitas jawaban, ketersediaan resource, latency, kuota, dan kebutuhan deployment.
+       Pipeline generation menerima:
+       a. Pertanyaan pengguna
+       b. Konteks hasil retrieval
+       c. Instruksi atau system prompt
+       Kemudian mengembalikan jawaban menggunakan format internal yang konsisten.
+       Provider LLM dapat diganti tanpa mengubah proses embedding, retrieval, maupun pengelolaan FAQ.
+       Provider lain yang dapat dipertimbangkan untuk pengujian antara lain Groq, OpenRouter, Gemini, dan provider lain yang menyediakan API sesuai kebutuhan.
+   
+   6.3 Konfigurasi Awal
+       a. Embedding model        : BAAI/bge-m3
+       b. LLM                    : GLM-5.3-Flash
+       c. Provider awal          : Gonka Broker
+       d. Vector database        : Qdrant
+       e. Dimensi embedding awal : 1024
+       
+       Konfigurasi tersebut merupakan konfigurasi awal pengembangan, bukan keputusan permanen untuk deployment.
+
+   6.4 Catatan Pengujian
+       a. API key harus disimpan secara aman dalam environment variable backend
+       b. Jangan menaruh API key di frontend, repository GitHub, atau membagikannya melalui percakapan
+       c. Pastikan sumber API key, izin penggunaan, kuota, dan batas pemakaian diketahui
+       d. FreeLLM.net merupakan direktori model dan API gratis/trial. Provider, endpoint, dan ketentuan penggunaan aktual harus diperiksa pada halaman provider
+       e. API key dari teman merupakan informasi terpisah yang provider dan modelnya belum diketahui
+       f. Pengujian beberapa provider harus menggunakan pertanyaan dan konteks retrieval yang sama agar hasilnya dapat dibandingkan secara adil
+       g. Provider dan model final untuk deployment belum ditentukan
+
+7. Fase Development
+   a. Fase 1 - Persiapan Arsitektur dan Struktur Proyek
+      1) Menentukan tanggung jawab Express.js dan FastAPI
+      2) Menentukan kontrak komunikasi API
+      3) Merancang struktur folder proyek
+      4) Menyiapkan konfigurasi model dan vector database
+      5) Menentukan cara konfigurasi provider LLM agar mudah diganti
+      6) Menguji koneksi dan pemanggilan LLM melalui salah satu provider
+      7) Memastikan komponen-komponen tersebut dapat digunakan secara terpisah
+   b. Fase 2 - Persiapan Model dan Vector Database
+      1) Menyiapkan embedding model
+      2) Menyiapkan kandidat LLM untuk pengujian
+      3) Menyiapkan Qdrant
+      4) Memastikan embedding model dapat digunakan oleh FastAPI
+      5) Memastikan Qdrant dapat diakses oleh FastAPI
+      6) Menguji koneksi dan pemanggilan LLM melalui salah satu provider
+      7) Memastikan komponen-komponen tersebut dapat digunakan secara terpisah
+   c. Fase 3 - Ingestion Pipeline
+      1) Mengambil data FAQ dari PostgreSQL melalui Express.js
+      2) Memproses FAQ menjadi embedding
+      3) Menyimpan embedding dan payload ke Qdrant
+      4) Menguji proses CREATE FAQ
+      5) Menguji proses UPDATE FAQ
+      6) Memastikan identitas FAQ tetap konsisten antara PostgreSQL dan Qdrant
+   d. Fase 4 - Retrieval Pipeline
+      1) Menerima pertanyaan pengguna
+      2) Membuat embedding pertanyaan
+      3) Melakukan similarity search pada Qdrant
+      4) Mengambil FAQ yang relevan
+      5) Menguji relevansi hasil pencarian
+      6) Menentukan threshold relevansi berdasarkan hasil pengujian
+      7) Menangani kondisi ketika tidak ada konteks yang cukup relevan
+   e. Fase 5 - Generation Pipeline
+      1) Menyiapkan prompt
+      2) Mengirim pertanyaan dan konteks hasil retrieval ke LLM
+      3) Menghasilkan jawaban berdasarkan konteks
+      4) Menangani pertanyaan yang tidak memiliki konteks relevan
+      5) Menguji generation menggunakan beberap API LLM
+      6) Membandingkan kualitas jawaban, latency, stabilitas, dan batas penggunaan API
+      7) Menentukan kandidat provider/model yang paling sesuai
+   f. Fase 6 - Integrasi dan Sinkronisasi
+      1) Menghubungkan Express.js dengan FastAPI
+      2) Mengintegrasikan chatbot dengan frontend
+      3) Mengintegrasikan FAQ CREATE dan UPDATE
+      4) Menangani perubahan status aktif/nonaktif
+      5) Menangani DELETE jika diperlukan
+      6) Menangani kegagalan sinkronisasi dan retry
+      7) Memastikan kegagalan chatbot tidak mengganggu fitur utama aplikasi
+   g. Fase 7 - Pengujian dan Deployment
+      1) Menguji kualitas retrieval dan jawaban
+      2) Menguji perubahan FAQ
+      3) Menguji pertanyaan di luar cakupan chatbot
+      4) Menguji kegagalan model dan vector database
+      5) Menguji timeout, error, dan batas penggunaan API
+      6) Mengukur latency dan stabilitas pipeline
+      7) Menyiapkan deployment sesuai resource dan keterbatasan biaya yang tersedia
+
+PROGRESS PENGERJAAN RAG:
+1. Membuat struktur folder pada ai-service/
+   C:\DICODING\ASAH\CAPSTONE\AK_BAKERY_CAPSTONE\AI-SERVICE
+   │   .env.example
+   │   .gitignore
+   │   README.md
+   │
+   ├───app
+   │   │   main.py
+   │   │
+   │   ├───api
+   │   │   ├───endpoints
+   │   │   │       chat.py
+   │   │   │       faq.py
+   │   │   │       health.py
+   │   │   │
+   │   │   └───v1
+   │   │           router.py
+   │   │
+   │   ├───core
+   │   │       config.py
+   │   │       logging.py
+   │   │
+   │   ├───integrations
+   │   │   ├───gonka
+   │   │   │       embedding_client.py
+   │   │   │       llm_client.py
+   │   │   │
+   │   │   └───qdrant
+   │   │           client.py
+   │   │
+   │   ├───rag
+   │   │   │   pipeline.py
+   │   │   │   prompts.py
+   │   │   │   prompt_konteks_rag.txt
+   │   │   │
+   │   │   ├───embeddings
+   │   │   │       embedding_service.py
+   │   │   │
+   │   │   ├───generation
+   │   │   │       generator.py
+   │   │   │
+   │   │   └───retrieval
+   │   │           retriever.py
+   │   │
+   │   ├───schemas
+   │   │       chat.py
+   │   │       common.py
+   │   │       faq.py
+   │   │
+   │   └───services
+   │           chat_service.py
+   │           faq_service.py
+   │
+   ├───scripts
+   └───tests
+      ├───integration
+      └───unit
+2. Menentukan alur komunikasi Express.js dan FastAPI
+3. Membuat API contract.
+
+Pertanyaan:
+Aku ingin membuat sebuah dokumen untuk API contract. Apa itu sudah lengkap? atau butuh yang lainnya?
