@@ -1008,6 +1008,15 @@ PROGRESS PENGERJAAN RAG:
       └───unit
 2. Menentukan alur komunikasi Express.js dan FastAPI
 3. Membuat API contract.
+4. Membuat virtual environment dan menginstall package-package yang dibutuhkan, diantaranya adalah:
+   a. FastAPI -> Framework python untuk membangun API berbasis HTTP
+   b. Uvicorn -> Server yang menjalankan FastAPI agar dapat menerima HTTP request
+   c. Pydantic Settings -> Membaca, memvalidasi, dan mengelola konfigurasi aplikasi
+   d. python-dotenv -> Membaca variabel dari file .env dan memasukkannya ke environment variable proses python
+   e. HTTPX -> Mengirim HTTP request dari python ke layanan lain
+   f. Qdrant Client -> Menghubungkan aplikasi Python dengan Qdrant
+   g. OpenAI SDK -> Berkomunikasi dengan API yang menggunakan format kompatibel OpenAI, dalam proyek ini untuk mengakses Gonka Broker
+   
 
 Pertanyaan:
 Aku ingin membuat sebuah dokumen untuk API contract. Apa itu sudah lengkap? atau butuh yang lainnya?
