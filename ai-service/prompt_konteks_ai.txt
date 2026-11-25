@@ -955,7 +955,10 @@ PROGRESS PENGERJAAN RAG:
 1. Membuat struktur folder pada ai-service/
    C:\DICODING\ASAH\CAPSTONE\AK_BAKERY_CAPSTONE\AI-SERVICE
    │   .env.example
+   │   .venv
+   │   requirements.txt
    │   .gitignore
+   │   prompt_konteks_ai.txt
    │   README.md
    │
    ├───app
@@ -1019,7 +1022,7 @@ PROGRESS PENGERJAAN RAG:
    e. HTTPX -> Mengirim HTTP request dari python ke layanan lain
    f. Qdrant Client -> Menghubungkan aplikasi Python dengan Qdrant
    g. OpenAI SDK -> Berkomunikasi dengan API yang menggunakan format kompatibel OpenAI, dalam proyek ini untuk mengakses Gonka Broker
-   
+5. Mengisi file ai-service/app/core/config.py
+6. Mengisi file .env
 
-Pertanyaan:
-Aku ingin membuat sebuah dokumen untuk API contract. Apa itu sudah lengkap? atau butuh yang lainnya?
+
