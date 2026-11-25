@@ -80,6 +80,9 @@ KONTEKS PROYEK:
           3) Mengembangkan sistem RAG
           4) Mengembangkan model klasifikasi intent
           5) Menyediakan layanan AI melalui API
+          Pembagian tugas internal tim Next-Gen AI Engineer:
+          - Fokus Naufal: Sistem RAG, layanan chatbot, dan API serving terkait RAG
+          - Fokus Andra: Model prediksi berbasis regresi menggunakan dataset dari tim Data Science dan API serving terkait model tersebut
         b. Data Science Specialist:
           1) Melakukan data wrangling
           2) Menganalisis data bisnis
