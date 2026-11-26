@@ -783,7 +783,7 @@ KONTEKS PROYEK:
          p. libur_sekolah bernilai 1 untuk pekan libur sekolah (berasal dari data libur sekolah DKI Jakarta) -> Keluarga lebih banyak ke mal; mungkin menjelaskan lonjakan Juli 
 
 KONTEKS TAMBAHAN UNTUK RAG:
-1. Struktur Tabel FAQ
+1. Struktur Tabel FAQ (satu-satunya sumber pengetahuan chatbot)
    a. id -> Primary key
    b. question -> Pertanyaan FAQ
    c. answer -> Jawaban FAQ
@@ -1082,6 +1082,9 @@ PROGRESS PENGERJAAN RAG:
      
      - ai-service/app/main.py
    
+   - ai-service/docs/
+     - ai-service/docs/intent-router-contract.md
+
    - ai-service/scripts/
      - ai-service/scripts/check_connections.py
    
