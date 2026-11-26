@@ -1033,6 +1033,7 @@ KONTEKS TAMBAHAN UNTUK RAG:
 
 PROGRESS PENGERJAAN RAG:
 1. Membuat struktur folder untuk AI Service. Isi dari root foldernya adalah:
+   - ai-service/.venv/
    - ai-service/app/
      - ai-service/app/api/
        - ai-service/app/api/endpoints/
