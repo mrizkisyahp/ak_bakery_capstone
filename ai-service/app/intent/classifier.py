@@ -24,3 +24,17 @@ class DummyIntentClassifier:
       
       if any(keyword in normalized_text for keyword in keywords):
         detected_intents.append(intent)
+        
+    if not detected_intents:
+      return IntentClassificationResult(
+        intent="other",
+        confidence=0.50,
+      )
+    
+    selected_intent = detected_intents[0]
+    
+    return IntentClassificationResult(
+      intent=selected_intent,
+      confidence=0.95
+    )
+        

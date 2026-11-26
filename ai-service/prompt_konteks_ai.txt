@@ -1034,6 +1034,7 @@ KONTEKS TAMBAHAN UNTUK RAG:
 PROGRESS PENGERJAAN RAG:
 1. Membuat struktur folder untuk AI Service. Isi dari root foldernya adalah:
    - ai-service/.venv/
+
    - ai-service/app/
      - ai-service/app/api/
        - ai-service/app/api/endpoints/
@@ -1042,20 +1043,24 @@ PROGRESS PENGERJAAN RAG:
          - ai-service/app/api/endpoints/health.py
        - ai-service/app/api/v1/
          - ai-service/app/api/v1/router.py
+
      - ai-service/app/core/
        - ai-service/app/core/config.py
        - ai-service/app/core/logging.py
+     
      - ai-service/app/integrations/
        - ai-service/app/integrations/gonka/
          - ai-service/app/integrations/gonka/embedding_client.py
          - ai-service/app/integrations/gonka/llm_client.py
        - ai-service/app/integrations/qdrant/
          - ai-service/app/integrations/qdrant/client.py
+     
      - ai-service/app/intent/
        - ai-service/app/intent/__init__.py
        - ai-service/app/intent/classifier.py
        - ai-service/app/intent/keywords.py
        - ai-service/app/intent/schemas.py
+     
      - ai-service/app/rag/
        - ai-service/app/rag/embeddings/
          - ai-service/app/rag/embeddings/embedding_service.py
@@ -1065,25 +1070,38 @@ PROGRESS PENGERJAAN RAG:
          - ai-service/app/rag/retrieval/retriever.py
        - ai-service/app/rag/pipeline.py
        - ai-service/app/rag/prompts.py
+     
      - ai-service/app/schemas/
        - ai-service/app/schemas/chat.py
        - ai-service/app/schemas/common.py
        - ai-service/app/schemas/faq.py
+     
      - ai-service/app/services/
        - ai-service/app/services/chat_service.py
        - ai-service/app/services/faq_service.py
+     
      - ai-service/app/main.py
+   
    - ai-service/scripts/
      - ai-service/scripts/check_connections.py
+   
    - ai-service/tests/
      - ai-service/tests/integration/
      - ai-service/tests/unit/
+       - ai-service/tests/unit/test_intent_classifier.py
+   
    - ai-service/.env
+   
    - ai-service/.env.example
+   
    - ai-service/.gitignore
+   
    - ai-service/prompt_konteks_ai.txt
+   
    - ai-service/README.md
+   
    - ai-service/requirements.txt
+   
 2. Menentukan alur komunikasi Express.js dan FastAPI
 3. Membuat API contract.
 4. Membuat virtual environment dan menginstall package-package yang dibutuhkan, diantaranya adalah:
@@ -1099,4 +1117,5 @@ PROGRESS PENGERJAAN RAG:
 7. Membuat file ai-service/scripts/check_connections.py untuk memeriksa apakah semua API dapat berjalan dengan baik
 8. Saat ini, belum ada model klasifikasi intent yang dibuat, tetapi aku tetap mau menyiapkan infrastrukturnya dulu agar ketika nanti modelnya siap, bisa langsung diintegrasikan
 9. Sudah membuat simulasi intent yang terletak pada ai-service/app/intent
+10. Sudah menguji simulasi intent dengan file ai-service/tests/unit/test_intent_classifier.py
 
