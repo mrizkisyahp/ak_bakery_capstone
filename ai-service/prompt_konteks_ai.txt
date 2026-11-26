@@ -799,29 +799,59 @@ KONTEKS TAMBAHAN UNTUK RAG:
    e. Embedding model   : BAAI/bge-m3
    f. LLM               : GLM-5.3 Flash
    g. LLM provider      : Gonka Broker
+   h. Intent classifier : Dummy keyword-based classifier (sementara, nanti akan diganti oleh model yang dilatih sendiri)
+   i. Intent router     : Komponen untuk menentukan alur chatbot berdasarkan hasil klasifikasi
 
 3. Arsitektur Sistem:
    a. Frontend -> Antarmuka chatbot
    b. Express.js -> Backend utama dan API gateway
    c. PostgreSQL -> Database utama, termasuk penyimpanan FAQ
-   d. FastAPI -> AI Service yang mengelola pipeline RAG
+   d. FastAPI -> AI Service yang mengelola proses chatbot, termasuk intent classification, intent routing, dan pipeline RAG
    e. Embedding model -> Mengubah pertanyaan dan FAQ menjadi representasi vektor
    f. Qdrant -> Menyimpan embedding dan payload serta melakukan pencarian kemiripan
    g. LLM -> Menghasilkan jawaban berdasarkan pertanyaan dan konteks hasil retrieval
+   h. Intent Classifier -> Mengidentifikasi maksud atau tujuan pesan pengguna
+   i. Intent Router -> Menentukan instruksi atau konfigurasi prompt berdasarkan hasil klasifikasi intent sebelum pesan diproses oleh RAG Pipeline
+   Catatan:
+   a. Semua kategori intent diarahkan ke RAG pipeline.
+   b. Perbedaan setiap intent terletak pada instruksi generation yang digunakan LLM
+   c. Intent Classifier dan Intent Router dikelola di dalam FastAPI
+   d. PostgreSQL tetap menjadi sumber data utama untuk FAQ, sedangkan Qdrant digunakan untuk pencarian informasi berdasarkan kemiripan vektor
 
 4. Alur RAG Saat Pengguna Menggunakan Chatbot:
    a. Pengguna mengirimkan pertanyaan melalui frontend
    b. Express.js menerima pertanyaan dan meneruskannya ke FastAPI
-   c. FastAPI menerima pertanyaan dan meminta embedding model mengubah pertanyaan menjadi vektor
-   d. FastAPI menggunakan vektor tersebut untuk melakukan similarity search pada Qdrant
-   e. Qdrant mengembalikan FAQ yang relevan beserta payload-nya
-   f. FastAPI memeriksa hasil retrieval dan menyiapkan konteks untuk LLM
-   g. FastAPI mengirimkan pertanyaan dan konteks ke hasil retrieval kepada LLM
-   h. LLM menyusun jawaban berdasarkan konteks yang diberikan
-   i. FastAPI menerima hasil generation dan mengembalikannya kepada Express.js
-   j. Express.js mengirimkan jawaban kepada frontend untuk ditampilkan kepada pengguna
-
-   Catatan: Retrieval dan generation tetap dikelola dalam FastAPI. Hasil retrieval tidak perlu dikembalikan ke Express.js terlebih dahulu.
+   c. FastAPI menerima pertanyaan dan meneruskannya ke Intent Classifier
+   d. Intent Classifier mengidentifikasi maksud pengguna dan menghasilkan hasil klasifikasi berupa intent dan confidence
+   e. Intent Router menerima hasil klasifikasi dan menentukan instruksi generation berdasarkan intent yang terdeteksi
+   f. Semua kategori intent diteruskan ke RAG pipeline dengan instruksi yang sesuai
+   g. RAG pipeline menjalankan proses berikut:
+      1) FastAPI meminta embedding model mengubah pertanyaan pengguna menjadi vektor
+      2) FastAPI menggunakan vektor tersebut untuk melakukan similarity search pada Qdrant
+      3) Qdrant mengembalikan FAQ yang relevan beserta payload-nya
+      4) FastAPI memeriksa hasil retrieval dan menyiapkan konteks untuk LLM
+      5) FastAPI mengirimkan pertanyaan, konteks hasil retrieval, dan instruksi generation yang telah ditentukan berdasarkan intent kepada LLM
+      6) LLM menghasilkan jawaban berdasarkan konteks dan instruksi yang diberikan
+      7) FastAPI menerima hasil generation
+   h. Perlakuan generation berdasarkan intent:
+      1) product_inquiry: LLM menjawab pertanyaan pengguna berdasarkan konteks hasil retrieval mengenai produk, harga, varian, ketersediaan, dan informasi produk lainnya
+      2) ordering: LLM memberikan informasi terkait pemesanan dan mengarahkan pengguna untuk menghubungi Adiskirani Bakery melalui nomor WhatsApp resmi
+      3) complaint: LLM memberikan respons yang empatik terhadap keluhan pengguna dan mengarahkan pengguna untuk menghubungi Adiskirani Bakery melalui nomor WhatsApp resmi
+      4) other: LLM menjawab pertanyaan apabila masih berkaitan dengan bisnis Adiskirani Bakery dan didukung oleh konteks yang relevan. Jika pertanyaan tidak berkaitan dengan bisnis Adiskirani Bakery, sistem memberikan penolakan secara sopan
+   i. FastAPI mengembalikan hasil pemrosesan kepada Express.js
+   j. Express.js meneruskan jawaban kepada frontend untuk ditampilkan kepada pengguna
+   k. Catatan:
+      1) Intent Classification dan Intent Routing dikelola dalam FastAPI
+      2) Semua intent menggunakan RAG Pipeline
+      3) Retrieval dan generation tetap dikelola sepenuhnya dalam FastAPI
+      4) Hasil retrieval tidak perlu dikembalikan ke Express.js
+      5) Jawaban LLM harus berdasarkan informasi bisnis yang tersedia dan tidak boleh mengarang informasi
+      6) Jika konteks retrieval tidak mencukupi, sistem harus memiliki mekanisme fallback
+      7) Nomor WhatsApp harus berasal dari sumber informasi resmi yang telah dikonfigurasi, bukan dihasilkan atau ditebak oleh LLM
+      8) Embedding pertanyaan dilakukan satu kali dalam proses retrieval, bukan sebelum dan di dalam RAG Pipeline secara terpisah
+      9) Jika hasil retrieval tidak relevan atau tidak mencukupi, LLM tidak boleh dipaksa menghasilkan jawaban berdasarkan konteks tersebut
+      10) Jika confidence hasil klasifikasi berada di bawah threshold yang ditentukan berdasarkan pengujian, sistem menggunakan penanganan fallback yang aman. Untuk tahap awal, pesan dapat diarahkan ke intent other dan tetap diperiksa relevansinya terhadap bisnis
+      11) Jika proses klasifikasi mengalami kegagalan, sistem tidak boleh melanjutkan routing menggunakan hasil klasifikasi yang tidak valid
 
 5. Alur FAQ Ingestion dan Sinkronisasi
    5.1 CREATE FAQ
@@ -875,8 +905,31 @@ KONTEKS TAMBAHAN UNTUK RAG:
        Kemudian mengembalikan jawaban menggunakan format internal yang konsisten.
        Provider LLM dapat diganti tanpa mengubah proses embedding, retrieval, maupun pengelolaan FAQ.
        Provider lain yang dapat dipertimbangkan untuk pengujian antara lain Groq, OpenRouter, Gemini, dan provider lain yang menyediakan API sesuai kebutuhan.
-   
-   6.3 Konfigurasi Awal
+
+   6.3 Fleksibilitas Intent Classification
+       Intent classification digunakan untuk mengidentifikasi maksud pengguna sebelum pesan diteruskan ke alur pemrosesan chatbot.
+
+       Intent yang digunakan pada tahap awal:
+       a. product_inquiry -> Pertanyaan mengenai produk, harga, varian, stok, dan informasi produk lainnya
+       b. ordering -> Pertanyaan atau pesan terkait pemesanan produk
+       c. complaint -> Keluhan atau masalah yang disampaikan pelanggan
+       d. other -> Pesan yang tidak cocok dengan ketiga kategori intent di atas
+
+       Implementasi awal menggunakan DummyIntentClassifier berbasis pencocokan keyword untuk menguji alur klasifikasi dan routing.
+
+       Dummy classifier bukan model machine learning dan tidak merepresentasikan kemampuan klasifikasi model sebenarnya.
+
+       Prinsip pengembangan:
+       a. Proses klasifikasi dipisahkan dari proses routing
+       b. Hasil klasifikasi menggunakan format internal yang konsisten, yaitu intent dan confidence
+       c. Implementasi dummy akan diganti dengan model klasifikasi tanpa mengubah keseluruhan sistem routing
+       d. Semua kategori intent menggunakan RAG Pipeline
+       e. Intent Router menentukan instruksi generation yang digunakan oleh LLM berdasarkan intent
+       f. Perubahan kategori intent atau instruksi generation tidak boleh mengharuskan perubahan besar pada proses embedding dan retrieval
+       g. Penanganan confidence rendah harus disediakan agar hasil klasifikasi yang tidak meyakinkan tidak langsung menghasilkan routing yang keliru
+       h. Threshold confidence ditentukan berdasarkan hasil pengujian, bukan menggunakan angka yang diasumsikan sebagai standar universal
+
+   6.4 Konfigurasi Awal
        a. Embedding model        : BAAI/bge-m3
        b. LLM                    : GLM-5.3-Flash
        c. Provider awal          : Gonka Broker
@@ -885,7 +938,7 @@ KONTEKS TAMBAHAN UNTUK RAG:
        
        Konfigurasi tersebut merupakan konfigurasi awal pengembangan, bukan keputusan permanen untuk deployment.
 
-   6.4 Catatan Pengujian
+   6.5 Catatan Pengujian
        a. API key harus disimpan secara aman dalam environment variable backend
        b. Jangan menaruh API key di frontend, repository GitHub, atau membagikannya melalui percakapan
        c. Pastikan sumber API key, izin penggunaan, kuota, dan batas pemakaian diketahui
@@ -903,6 +956,9 @@ KONTEKS TAMBAHAN UNTUK RAG:
       5) Menentukan cara konfigurasi provider LLM agar mudah diganti
       6) Menguji koneksi dan pemanggilan LLM melalui salah satu provider
       7) Memastikan komponen-komponen tersebut dapat digunakan secara terpisah
+      8) Menentukan posisi Intent Classifier dan Intent Router dalam arsitektur FastAPI
+      9) Menentukan format output klasifikasi intent
+      10) Menentukan hubungan antara hasil klasifikasi dan alur pemrosesan chatbot
    b. Fase 2 - Persiapan Model dan Vector Database
       1) Menyiapkan embedding model
       2) Menyiapkan kandidat LLM untuk pengujian
@@ -926,15 +982,33 @@ KONTEKS TAMBAHAN UNTUK RAG:
       5) Menguji relevansi hasil pencarian
       6) Menentukan threshold relevansi berdasarkan hasil pengujian
       7) Menangani kondisi ketika tidak ada konteks yang cukup relevan
-   e. Fase 5 - Generation Pipeline
+
+   e. Fase 5 - Intent Classification dan Routing
+      1) Menentukan kategori intent yang dibutuhkan chatbot
+      2) Menyiapkan struktur dan kontrak output klasifikasi
+      3) Membuat dummy classifier berbasis keyword untuk pengujian awal
+      4) Menguji klasifikasi menggunakan berbagai variasi pertanyaan
+      5) Menguji kondisi ketika satu pesan cocok dengan beberapa intent
+      6) Mengembangkan Intent Router berdasarkan hasil klasifikasi
+      7) Mengintegrasikan Intent Router dengan RAG Pipeline
+      8) Menyiapkan integrasi dengan model klasifikasi
+      9) Menguji mekanisme fallback dan penanganan klasifikasi yang tidak meyakinkan
+      10) Memastikan setiap kategori intent diarahkan ke RAG Pipeline
+      11) Menguji perbedaan instruksi generation untuk setiap intent.
+      12) Memastikan intent ordering dan complaint mengarahkan pengguna ke nomor WhatsApp resmi.
+      13) Menguji kemampuan intent other membedakan pertanyaan yang relevan dan tidak relevan dengan bisnis.
+      14) Memastikan LLM tidak memberikan jawaban tanpa dukungan konteks yang memadai.
+   
+   f. Fase 6 - Generation Pipeline
       1) Menyiapkan prompt
       2) Mengirim pertanyaan dan konteks hasil retrieval ke LLM
       3) Menghasilkan jawaban berdasarkan konteks
       4) Menangani pertanyaan yang tidak memiliki konteks relevan
-      5) Menguji generation menggunakan beberap API LLM
+      5) Menguji generation menggunakan beberapa API LLM
       6) Membandingkan kualitas jawaban, latency, stabilitas, dan batas penggunaan API
       7) Menentukan kandidat provider/model yang paling sesuai
-   f. Fase 6 - Integrasi dan Sinkronisasi
+   
+   g. Fase 7 - Integrasi dan Sinkronisasi
       1) Menghubungkan Express.js dengan FastAPI
       2) Mengintegrasikan chatbot dengan frontend
       3) Mengintegrasikan FAQ CREATE dan UPDATE
@@ -942,7 +1016,8 @@ KONTEKS TAMBAHAN UNTUK RAG:
       5) Menangani DELETE jika diperlukan
       6) Menangani kegagalan sinkronisasi dan retry
       7) Memastikan kegagalan chatbot tidak mengganggu fitur utama aplikasi
-   g. Fase 7 - Pengujian dan Deployment
+   
+   h. Fase 8 - Pengujian dan Deployment
       1) Menguji kualitas retrieval dan jawaban
       2) Menguji perubahan FAQ
       3) Menguji pertanyaan di luar cakupan chatbot
@@ -950,10 +1025,64 @@ KONTEKS TAMBAHAN UNTUK RAG:
       5) Menguji timeout, error, dan batas penggunaan API
       6) Mengukur latency dan stabilitas pipeline
       7) Menyiapkan deployment sesuai resource dan keterbatasan biaya yang tersedia
+      8) Menguji ketepatan klasifikasi intent
+      9) Menguji routing untuk setiap kategori intent
+      10) Menguji pesan ambigu dan pesan yang cocok dengan beberapa kategori intent
+      11) Menguji fallback untuk intent other
+      12) Memastikan kegagalan intent classifier tidak mengganggu fitur utama aplikasi
 
 PROGRESS PENGERJAAN RAG:
-1. Membuat struktur folder pada ai-service/
-   C:\DICODING\ASAH\CAPSTONE\AK_BAKERY_CAPSTONE\AI-SERVICE
+1. Membuat struktur folder untuk AI Service. Isi dari root foldernya adalah:
+   - ai-service/app/
+     - ai-service/app/api/
+       - ai-service/app/api/endpoints/
+         - ai-service/app/api/endpoints/chat.py
+         - ai-service/app/api/endpoints/faq.py
+         - ai-service/app/api/endpoints/health.py
+       - ai-service/app/api/v1/
+         - ai-service/app/api/v1/router.py
+     - ai-service/app/core/
+       - ai-service/app/core/config.py
+       - ai-service/app/core/logging.py
+     - ai-service/app/integrations/
+       - ai-service/app/integrations/gonka/
+         - ai-service/app/integrations/gonka/embedding_client.py
+         - ai-service/app/integrations/gonka/llm_client.py
+       - ai-service/app/integrations/qdrant/
+         - ai-service/app/integrations/qdrant/client.py
+     - ai-service/app/intent/
+       - ai-service/app/intent/__init__.py
+       - ai-service/app/intent/classifier.py
+       - ai-service/app/intent/keywords.py
+       - ai-service/app/intent/schemas.py
+     - ai-service/app/rag/
+       - ai-service/app/rag/embeddings/
+         - ai-service/app/rag/embeddings/embedding_service.py
+       - ai-service/app/rag/generation/
+         - ai-service/app/rag/generation/generator.py
+       - ai-service/app/rag/retrieval/
+         - ai-service/app/rag/retrieval/retriever.py
+       - ai-service/app/rag/pipeline.py
+       - ai-service/app/rag/prompts.py
+     - ai-service/app/schemas/
+       - ai-service/app/schemas/chat.py
+       - ai-service/app/schemas/common.py
+       - ai-service/app/schemas/faq.py
+     - ai-service/app/services/
+       - ai-service/app/services/chat_service.py
+       - ai-service/app/services/faq_service.py
+     - ai-service/app/main.py
+   - ai-service/scripts/
+     - ai-service/scripts/check_connections.py
+   - ai-service/tests/
+     - ai-service/tests/integration/
+     - ai-service/tests/unit/
+   - ai-service/.env
+   - ai-service/.env.example
+   - ai-service/.gitignore
+   - ai-service/prompt_konteks_ai.txt
+   - ai-service/README.md
+   - ai-service/requirements.txt
 2. Menentukan alur komunikasi Express.js dan FastAPI
 3. Membuat API contract.
 4. Membuat virtual environment dan menginstall package-package yang dibutuhkan, diantaranya adalah:
