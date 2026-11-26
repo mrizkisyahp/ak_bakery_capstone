@@ -954,64 +954,6 @@ KONTEKS TAMBAHAN UNTUK RAG:
 PROGRESS PENGERJAAN RAG:
 1. Membuat struktur folder pada ai-service/
    C:\DICODING\ASAH\CAPSTONE\AK_BAKERY_CAPSTONE\AI-SERVICE
-   │   .env.example
-   │   .venv
-   │   requirements.txt
-   │   .gitignore
-   │   prompt_konteks_ai.txt
-   │   README.md
-   │
-   ├───app
-   │   │   main.py
-   │   │
-   │   ├───api
-   │   │   ├───endpoints
-   │   │   │       chat.py
-   │   │   │       faq.py
-   │   │   │       health.py
-   │   │   │
-   │   │   └───v1
-   │   │           router.py
-   │   │
-   │   ├───core
-   │   │       config.py
-   │   │       logging.py
-   │   │
-   │   ├───integrations
-   │   │   ├───gonka
-   │   │   │       embedding_client.py
-   │   │   │       llm_client.py
-   │   │   │
-   │   │   └───qdrant
-   │   │           client.py
-   │   │
-   │   ├───rag
-   │   │   │   pipeline.py
-   │   │   │   prompts.py
-   │   │   │   prompt_konteks_rag.txt
-   │   │   │
-   │   │   ├───embeddings
-   │   │   │       embedding_service.py
-   │   │   │
-   │   │   ├───generation
-   │   │   │       generator.py
-   │   │   │
-   │   │   └───retrieval
-   │   │           retriever.py
-   │   │
-   │   ├───schemas
-   │   │       chat.py
-   │   │       common.py
-   │   │       faq.py
-   │   │
-   │   └───services
-   │           chat_service.py
-   │           faq_service.py
-   │
-   ├───scripts
-   └───tests
-      ├───integration
-      └───unit
 2. Menentukan alur komunikasi Express.js dan FastAPI
 3. Membuat API contract.
 4. Membuat virtual environment dan menginstall package-package yang dibutuhkan, diantaranya adalah:
@@ -1024,5 +966,7 @@ PROGRESS PENGERJAAN RAG:
    g. OpenAI SDK -> Berkomunikasi dengan API yang menggunakan format kompatibel OpenAI, dalam proyek ini untuk mengakses Gonka Broker
 5. Mengisi file ai-service/app/core/config.py
 6. Mengisi file .env
-
+7. Membuat file ai-service/scripts/check_connections.py untuk memeriksa apakah semua API dapat berjalan dengan baik
+8. Saat ini, belum ada model klasifikasi intent yang dibuat, tetapi aku tetap mau menyiapkan infrastrukturnya dulu agar ketika nanti modelnya siap, bisa langsung diintegrasikan
+9. Sudah membuat simulasi intent yang terletak pada ai-service/app/intent
 

@@ -62,7 +62,7 @@ def check_gonka(settings):
     messages=[
       {
         "role": "user",
-        "content": "Jawab singkat: Apa itu Adiskirani Bakery?"
+        "content": "Jawab singkat: Apa itu RAG"
       }
     ],
     max_tokens=1024,
