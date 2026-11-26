@@ -1060,6 +1060,7 @@ PROGRESS PENGERJAAN RAG:
        - ai-service/app/intent/classifier.py
        - ai-service/app/intent/keywords.py
        - ai-service/app/intent/schemas.py
+       - ai-service/app/intent/router.py
      
      - ai-service/app/rag/
        - ai-service/app/rag/embeddings/
@@ -1092,6 +1093,7 @@ PROGRESS PENGERJAAN RAG:
      - ai-service/tests/integration/
      - ai-service/tests/unit/
        - ai-service/tests/unit/test_intent_classifier.py
+       - ai-service/tests/unit/test_intent_router.py
    
    - ai-service/.env
    
@@ -1121,4 +1123,5 @@ PROGRESS PENGERJAAN RAG:
 8. Saat ini, belum ada model klasifikasi intent yang dibuat, tetapi aku tetap mau menyiapkan infrastrukturnya dulu agar ketika nanti modelnya siap, bisa langsung diintegrasikan
 9. Sudah membuat simulasi intent yang terletak pada ai-service/app/intent
 10. Sudah menguji simulasi intent dengan file ai-service/tests/unit/test_intent_classifier.py
-
+11. Sudah membuat intent router
+12. Sudah menguji intent router
