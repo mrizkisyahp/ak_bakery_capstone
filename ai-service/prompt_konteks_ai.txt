@@ -1094,6 +1094,11 @@ PROGRESS PENGERJAAN RAG:
      - ai-service/tests/unit/
        - ai-service/tests/unit/test_intent_classifier.py
        - ai-service/tests/unit/test_intent_router.py
+       - ai-service/tests/unit/test_embedding_service.py
+       - ai-service/tests/unit/test_retriever.py
+       - ai-service/tests/unit/test_generator.py
+       - ai-service/tests/unit/test_rag_pipeline.py
+       - ai-service/tests/unit/test_chat_service.py
    
    - ai-service/.env
    
@@ -1125,3 +1130,4 @@ PROGRESS PENGERJAAN RAG:
 10. Sudah menguji simulasi intent dengan file ai-service/tests/unit/test_intent_classifier.py
 11. Sudah membuat intent router
 12. Sudah menguji intent router
+
