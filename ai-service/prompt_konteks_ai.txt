@@ -1088,6 +1088,8 @@ PROGRESS PENGERJAAN RAG:
 
    - ai-service/scripts/
      - ai-service/scripts/check_connections.py
+     - ai-service/scripts/check_qdrant_collection.py
+     - ai-service/scripts/create_qdrant_collection.py
    
    - ai-service/tests/
      - ai-service/tests/integration/
@@ -1130,4 +1132,13 @@ PROGRESS PENGERJAAN RAG:
 10. Sudah menguji simulasi intent dengan file ai-service/tests/unit/test_intent_classifier.py
 11. Sudah membuat intent router
 12. Sudah menguji intent router
+13. Membuat integrasi dengan Gonka Broker untuk kebutuhan embedding
+14. Membuat embedding service
+15. Membuat koneksi ke Qdrant
+16. Membuat FAQ retriever
+17. Membuat response generator
+18. Membuat RAG pipeline
+19. Membuat chat service
+20. Melakukan unit testing terhadap komponen-komponen AI Service
+21. Membuat collection pada Qdrant dengan nama adiskirani_faq
 
