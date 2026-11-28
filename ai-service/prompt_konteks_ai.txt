@@ -1069,6 +1069,9 @@ PROGRESS PENGERJAAN RAG:
          - ai-service/app/rag/generation/generator.py
        - ai-service/app/rag/retrieval/
          - ai-service/app/rag/retrieval/retriever.py
+       - ai-service/app/rag/storage/
+         - ai-service/app/rag/storage/__init__.py
+         - ai-service/app/rag/storage/faq_vector_store.py
        - ai-service/app/rag/pipeline.py
        - ai-service/app/rag/prompts.py
      
@@ -1101,6 +1104,7 @@ PROGRESS PENGERJAAN RAG:
        - ai-service/tests/unit/test_generator.py
        - ai-service/tests/unit/test_rag_pipeline.py
        - ai-service/tests/unit/test_chat_service.py
+       - ai-service/tests/unit/test_faq_vector_store.py
    
    - ai-service/.env
    
@@ -1141,4 +1145,3 @@ PROGRESS PENGERJAAN RAG:
 19. Membuat chat service
 20. Melakukan unit testing terhadap komponen-komponen AI Service
 21. Membuat collection pada Qdrant dengan nama adiskirani_faq
-
